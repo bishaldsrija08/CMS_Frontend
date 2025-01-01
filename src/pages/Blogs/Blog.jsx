@@ -7,8 +7,12 @@ const Blog = () => {
   //API call here
 
   const fetchBlogs = async () => {
-    const blogData = await axios.get("http://localhost:3000/blogs");
-    setBlogs(blogData.data.blogs)
+try {
+  const response = await axios.get("http://localhost:3000/blogs");
+  setBlogs(response.data.blogs)
+} catch (error) {
+  alert(error)
+}
   };
   useEffect(() => {
     fetchBlogs();
@@ -17,14 +21,14 @@ const Blog = () => {
   return (
 <>
   <Navbar/>
-  <div className="card" style={{ width: "18rem" }}>
 
     {
       blogs.map((blog)=>{
         return(
-          <div key={blog._id} className="card-body">
+  <div key={blog._id} className="card" style={{ width: "18rem", marginBottom: "1rem", marginTop: "1rem" }}>
+          <div className="card-body">
           <h5 className="card-title">{blog.title}</h5>
-        <h6 className="card-title">{blog.subTitle}</h6>
+        <h6 className="card-title"><b>{blog.subTitle}</b></h6>
         <p className="card-text">
           {blog.description}
         </p>
@@ -33,9 +37,9 @@ const Blog = () => {
         </a>
         </div>
 
+  </div>
         )
       })}
-  </div>
 </>
   )
 }
