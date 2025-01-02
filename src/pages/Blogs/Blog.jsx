@@ -2,6 +2,8 @@ import axios from 'axios';
 import Navbar from '../../components/Navbar'
 import { useEffect, useState } from 'react';
 const Blog = () => {
+  
+  
   const [blogs, setBlogs] = useState([])
 
   //API call here
