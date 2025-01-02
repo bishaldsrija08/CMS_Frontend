@@ -1,34 +1,41 @@
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreateBlog = () => {
-    const Navigate = useNavigate()
-  const [title, setTitle] = useState("");
-  const [subTitle, setSubTitle] = useState("");
-  const [description, setDescription] = useState("");
-  console.log(title);
-  console.log(subTitle);
-  console.log(description);
+  const Navigate = useNavigate();
+
+  //   const [title, setTitle] = useState("");
+  //   const [subTitle, setSubTitle] = useState("");
+  //   const [description, setDescription] = useState("");
+
+  //   console.log(title);
+  //   console.log(subTitle);
+  //   console.log(description);
 
   const createBlog = async (e) => {
-    e.preventDefault();
-    const blog = {
-      title: title,
-      subTitle: subTitle,
-      description: description,
-    };
+    e.preventDefault(); // reload hudaina
+
+    // const blog = {
+    //   title: title,
+    //   subTitle: subTitle,
+    //   description: description,
+    // };
+
+    //Second Approach - problem chai fileharu upload garna pare aru code lekhna parxa
+    const formData = new FormData(e.currentTarget);
+    const blog = Object.fromEntries(formData);
 
     //send above states data to api.
     const response = await axios.post("http://localhost:3000/create/", blog);
     // console.log(response.data)
 
-    if(response.status==201){
-        alert(response.data.message)
-        Navigate("/")
-    }else{
-        alert("Something went wrong! Please try again later!")
+    if (response.status == 201) {
+      alert(response.data.message);
+      Navigate("/");
+    } else {
+      alert("Something went wrong! Please try again later!");
     }
   };
   return (
