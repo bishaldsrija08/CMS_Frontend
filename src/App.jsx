@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from  'react-router-dom'
 import Blog from './pages/Blogs/Blog'
 import CreateBlog from './pages/CreateBlog/CreateBlog'
+import SingleBlog from './pages/SingleBlog/SingleBlog'
+import DeleteBlog from './pages/DeleteBlog/DeleteBlog'
 function App() {
 
   return (
@@ -9,6 +11,8 @@ function App() {
   <Routes>
     <Route path='/' element={<Blog/>}/>
     <Route path='/create' element={<CreateBlog/>}/>
+    <Route path='/singleBlog/:id' element={<SingleBlog/>}/>
+    <Route path='/deleteBlog/:id' element={<DeleteBlog/>}/>
   </Routes>
 </BrowserRouter>
     </>

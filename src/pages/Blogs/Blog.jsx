@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Navbar from '../../components/Navbar'
 import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 const Blog = () => {
-  
   
   const [blogs, setBlogs] = useState([])
 
@@ -34,9 +34,7 @@ try {
         <p className="card-text">
           {blog.description}
         </p>
-        <a href="#" className="btn btn-primary">
-          Go somewhere
-        </a>
+        <Link to={`/singleBlog/${blog._id}`} className="btn btn-primary">Read blog</Link>
         </div>
 
   </div>
