@@ -1,11 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 const UpdateBlog = () => {
+  const Navigate = useNavigate();
   const { id } = useParams();
-  const [blog, setBlog] = useState([]);
+  const [blog, setBlog] = useState({});
 
   //Handle Change
 const handleChange = (e)=>{
@@ -25,7 +26,7 @@ const handleChange = (e)=>{
   const fetchSingleBlog = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/blogs/${id}`);
-      setBlog(response.data.blog);
+      setBlog(response.data.blog[0]);
     } catch (error) {
       alert(error);
     }
@@ -36,12 +37,24 @@ const handleChange = (e)=>{
 
   // console.log(blog);
 
+  //update code goes her
+
+  const updateBlog = async (e)=>{
+    e.preventDefault(); // reload hudaina
+   const response= await axios.patch("http://localhost:3000/blogs/"+id, blog)
+   if (response.status == 200) {
+    alert(response.data.message);
+    Navigate("/");
+  } else {
+    alert("Something went wrong! Please try again later!");
+  }
+  }
+
   return (
     <>
       <Navbar />
-      {blog.map((hi) => {
-        return (
-          <div key={hi._id} className="container mt-5">
+
+          <div key={blog.id} className="container mt-5">
             <div className="card shadow-sm">
               <div className="card-body">
                 <h1 className="card-title text-center">Form Title</h1>
@@ -52,7 +65,7 @@ const handleChange = (e)=>{
                   This is a short description of the form. Please update the
                   required fields below to proceed.
                 </p>
-                <form>
+                <form onSubmit={updateBlog}>
                   <div className="mb-3">
                     <label htmlFor="title" className="form-label">
                       Title
@@ -64,7 +77,7 @@ const handleChange = (e)=>{
                       name="title"
                       placeholder="Enter your title."
                       required
-                      value={hi.title}
+                      value={blog.title}
                       onChange={handleChange}
                     />
                   </div>
@@ -79,7 +92,7 @@ const handleChange = (e)=>{
                       name="subTitle"
                       placeholder="Enter your sub title."
                       required
-                      value={hi.subTitle}
+                      value={blog.subTitle}
                       onChange={handleChange}
                     />
                   </div>
@@ -94,7 +107,7 @@ const handleChange = (e)=>{
                       rows="4"
                       placeholder="Enter your 
                         description."
-                        value={hi.description}
+                        value={blog.description}
                         onChange={handleChange}
                     ></textarea>
                   </div>
@@ -105,8 +118,7 @@ const handleChange = (e)=>{
               </div>
             </div>
           </div>
-        );
-      })}
+
     </>
   );
 };
