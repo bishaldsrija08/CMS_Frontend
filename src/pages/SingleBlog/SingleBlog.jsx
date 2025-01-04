@@ -6,7 +6,7 @@ import Navbar from "../../components/Navbar";
 const SingleBlog = () => {
     const {id} = useParams()
     const [blog, setBlog] = useState([])
-
+// console.log(id)
     //API call here
 
   const fetchSingleBlog = async () => {
@@ -20,7 +20,7 @@ const SingleBlog = () => {
       useEffect(() => {
         fetchSingleBlog();
       }, []);
-      // console.log(blog)
+      console.log(blog)
   return (
     <>
     <Navbar/>
@@ -41,7 +41,8 @@ const SingleBlog = () => {
   )
 }))}
  </div>
- <Link to={`/deleteBlog/${id}`} className="btn btn-primary">Delete blog</Link>
+ <Link to={`/deleteBlog/${id}`} className="btn btn-primary">Delete blog</Link> <br/> <br/>
+ <Link to={`/update/${id}`} className="btn btn-primary">Update blog</Link>
     </>
   )
 }

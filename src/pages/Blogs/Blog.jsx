@@ -36,7 +36,6 @@ try {
         </p>
         <Link to={`/singleBlog/${blog._id}`} className="btn btn-primary">Read blog</Link>
         </div>
-
   </div>
         )
       })}

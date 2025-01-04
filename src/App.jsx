@@ -3,6 +3,7 @@ import Blog from './pages/Blogs/Blog'
 import CreateBlog from './pages/CreateBlog/CreateBlog'
 import SingleBlog from './pages/SingleBlog/SingleBlog'
 import DeleteBlog from './pages/DeleteBlog/DeleteBlog'
+import UpdateBlog from './pages/UpdateBlog/updateBlog'
 function App() {
 
   return (
@@ -13,6 +14,7 @@ function App() {
     <Route path='/create' element={<CreateBlog/>}/>
     <Route path='/singleBlog/:id' element={<SingleBlog/>}/>
     <Route path='/deleteBlog/:id' element={<DeleteBlog/>}/>
+    <Route path='/update/:id' element={<UpdateBlog/>}/>
   </Routes>
 </BrowserRouter>
     </>
